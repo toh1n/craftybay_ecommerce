@@ -1,7 +1,7 @@
+import 'package:craftybay_ecommerce/presentation/ui/utility/image_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../utility/image_manager.dart';
 
 class CompleteProfileScreen extends StatefulWidget {
   const CompleteProfileScreen({Key? key}) : super(key: key);
