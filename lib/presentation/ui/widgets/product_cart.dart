@@ -6,7 +6,7 @@ class ProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-
+      child: const Text("Product Card"),
     );
   }
 }
