@@ -1,6 +1,8 @@
+import 'package:craftybay_ecommerce/presentation/ui/screens/base_nav_screen.dart';
 import 'package:craftybay_ecommerce/presentation/ui/utility/image_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 
 class CompleteProfileScreen extends StatefulWidget {
@@ -86,7 +88,9 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.offAll(() => const MainBottomNavScreen());
+                    },
                     child: const Text('Complete'),
                   ),
                 ),

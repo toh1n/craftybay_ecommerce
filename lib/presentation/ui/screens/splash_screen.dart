@@ -1,3 +1,4 @@
+import 'package:craftybay_ecommerce/application/app_info.dart';
 import 'package:craftybay_ecommerce/presentation/ui/screens/auth/email_verification_screen.dart';
 import 'package:craftybay_ecommerce/presentation/ui/utility/image_manager.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +42,11 @@ class _SplashScreenState extends State<SplashScreen> {
           const SizedBox(
             height: 16,
           ),
-          const Text('Version 1.0.0'),
+          const Text(AppInfo.devInfo),
+          const SizedBox(
+            height: 8,
+          ),
+          const Text(AppInfo.versionInfo),
           const SizedBox(
             height: 16,
           ),
