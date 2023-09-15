@@ -27,132 +27,155 @@ class _HomeScreenState extends State<HomeScreen> {
     CategoryModel(Icons.diamond_outlined, "Fashion", () {}),
   ];
 
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        leadingWidth: 0,
-        title: Row(
-          children: [
-            SvgPicture.asset(
-              ImageManager.craftyBayNavLogoSVG,
-            ),
-            const Spacer(),
-            CircularIconButton(
-              icon: Icons.person,
-              onTap: () {},
-            ),
-            const SizedBox(
-              width: 8,
-            ),
-            CircularIconButton(
-              icon: Icons.call,
-              onTap: () {},
-            ),
-            const SizedBox(
-              width: 8,
-            ),
-            CircularIconButton(
-              icon: Icons.notifications_none,
-              onTap: () {},
-            ),
-          ],
-        ),
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              TextField(
-                decoration: InputDecoration(
-                  fillColor: Colors.grey.shade200,
-                  filled: true,
-                  prefixIcon: const Icon(Icons.search),
-                  hintText: 'Search',
-                  border: const OutlineInputBorder(borderSide: BorderSide.none),
-                  focusedBorder:
-                  const OutlineInputBorder(borderSide: BorderSide.none),
-                  enabledBorder:
-                  const OutlineInputBorder(borderSide: BorderSide.none),
-                ),
+    return WillPopScope(
+      onWillPop: () async {
+        return (await showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text('Exit App'),
+            content: const Text('Do you want to exit the app?'),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: const Text('No'),
               ),
-              const SizedBox(
-                height: 16,
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(true),
+                child: const Text('Yes'),
               ),
-              const HomeSlider(),
-              SectionHeader(
-                title: 'Categories',
-                onTap: () {
-                  Get.to(const CategoryListScreen());
-                },
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              SizedBox(
-                height: 90,
-                child: ListView.builder(
-                    itemCount: categoryData.length,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, index) {
-                      return  CategoryCard(icon: categoryData[index].iconData,categoryName: categoryData[index].categoryName,onTap: categoryData[index].onTap,);
-                    }),
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              SectionHeader(
-                title: 'Popular',
-                onTap: () {},
-              ),
-              SizedBox(
-                height: 165,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 20,
-                  itemBuilder: (context, index) {
-                    return const ProductCard();
-                  },
-                ),
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              SectionHeader(
-                title: 'Special',
-                onTap: () {},
-              ),
-              SizedBox(
-                height: 165,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 20,
-                  itemBuilder: (context, index) {
-                    return const ProductCard();
-                  },
-                ),
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              SectionHeader(
-                title: 'New',
-                onTap: () {},
-              ),
-              SizedBox(
-                height: 165,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 20,
-                  itemBuilder: (context, index) {
-                    return const ProductCard();
-                  },
-                ),
-              )
             ],
+          ),
+        )) ??
+            false;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          elevation: 0,
+          leadingWidth: 0,
+          title: Row(
+            children: [
+              SvgPicture.asset(
+                ImageManager.craftyBayNavLogoSVG,
+              ),
+              const Spacer(),
+              CircularIconButton(
+                icon: Icons.person,
+                onTap: () {},
+              ),
+              const SizedBox(
+                width: 8,
+              ),
+              CircularIconButton(
+                icon: Icons.call,
+                onTap: () {},
+              ),
+              const SizedBox(
+                width: 8,
+              ),
+              CircularIconButton(
+                icon: Icons.notifications_none,
+                onTap: () {},
+              ),
+            ],
+          ),
+        ),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                TextField(
+                  decoration: InputDecoration(
+                    fillColor: Colors.grey.shade200,
+                    filled: true,
+                    prefixIcon: const Icon(Icons.search),
+                    hintText: 'Search',
+                    border: const OutlineInputBorder(borderSide: BorderSide.none),
+                    focusedBorder:
+                    const OutlineInputBorder(borderSide: BorderSide.none),
+                    enabledBorder:
+                    const OutlineInputBorder(borderSide: BorderSide.none),
+                  ),
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                const HomeSlider(),
+                SectionHeader(
+                  title: 'Categories',
+                  onTap: () {
+                    Get.to(const CategoryListScreen());
+                  },
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                SizedBox(
+                  height: 90,
+                  child: ListView.builder(
+                      itemCount: categoryData.length,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        return  CategoryCard(icon: categoryData[index].iconData,categoryName: categoryData[index].categoryName,onTap: categoryData[index].onTap,);
+                      }),
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                SectionHeader(
+                  title: 'Popular',
+                  onTap: () {},
+                ),
+                SizedBox(
+                  height: 165,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 20,
+                    itemBuilder: (context, index) {
+                      return const ProductCard();
+                    },
+                  ),
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                SectionHeader(
+                  title: 'Special',
+                  onTap: () {},
+                ),
+                SizedBox(
+                  height: 165,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 20,
+                    itemBuilder: (context, index) {
+                      return const ProductCard();
+                    },
+                  ),
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                SectionHeader(
+                  title: 'New',
+                  onTap: () {},
+                ),
+                SizedBox(
+                  height: 165,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 20,
+                    itemBuilder: (context, index) {
+                      return const ProductCard();
+                    },
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),

@@ -1,3 +1,4 @@
+import 'package:craftybay_ecommerce/application/state_holder_binder.dart';
 import 'package:craftybay_ecommerce/presentation/ui/screens/splash_screen.dart';
 import 'package:craftybay_ecommerce/presentation/ui/utility/app_colors.dart';
 import 'package:flutter/material.dart';
@@ -36,6 +37,7 @@ class CraftyBay extends StatelessWidget {
             ),
           )
       ),
+      initialBinding: StateHolderBinder(),
     );
   }
 }

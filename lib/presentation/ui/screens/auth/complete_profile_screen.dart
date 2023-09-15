@@ -89,7 +89,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
-                      Get.offAll(() => const MainBottomNavScreen());
+                      Get.offAll(() => const BaseNavScreen());
                     },
                     child: const Text('Complete'),
                   ),
