@@ -58,10 +58,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
-                      if(_formKey.currentState!.validate()){
-                        Get.off(const OTPVerificationScreen());
-                      }
-
+                      Get.off(const OTPVerificationScreen());
                     },
                     child: const Text('Next'),
                   ),
