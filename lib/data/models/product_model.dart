@@ -1,18 +1,18 @@
 
-import 'package:craftybay_ecommerce/data/models/category_data.dart';
+import 'package:craftybay_ecommerce/data/models/product_data.dart';
 
-class CategoryModel {
+class ProductModel {
   String? msg;
-  List<CategoryData>? data;
+  List<Product>? data;
 
-  CategoryModel({this.msg, this.data});
+  ProductModel({this.msg, this.data});
 
-  CategoryModel.fromJson(Map<String, dynamic> json) {
+  ProductModel.fromJson(Map<String, dynamic> json) {
     msg = json['msg'];
     if (json['data'] != null) {
-      data = <CategoryData>[];
+      data = <Product>[];
       json['data'].forEach((v) {
-        data!.add(CategoryData.fromJson(v));
+        data!.add(Product.fromJson(v));
       });
     }
   }

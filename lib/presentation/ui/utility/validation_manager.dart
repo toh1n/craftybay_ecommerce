@@ -7,7 +7,7 @@ class ValidationManager {
       return ("Please Enter Your Email");
     }
     final RegExp emailRegExp = RegExp("^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]");
-    if (!emailRegExp.hasMatch(value)) {
+    if (!emailRegExp.hasMatch(value!)) {
 
       Fluttertoast.showToast(msg: "Please Enter a Valid Email.");
       return ("Please Enter a Valid Email.");

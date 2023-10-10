@@ -13,12 +13,12 @@ class CategoryListScreen extends StatefulWidget {
 
 class _CategoryListScreenState extends State<CategoryListScreen> {
 
-  List <CategoryModel> categoryData = [
-    CategoryModel(Icons.desktop_windows, "Electronics", () {}),
-    CategoryModel(Icons.fastfood, "Food", () {}),
-    CategoryModel(Icons.local_grocery_store_rounded, "Grocery", () {}),
-    CategoryModel(Icons.diamond_outlined, "Fashion", () {}),
-  ];
+  // List <CategoryModel> categoryData = [
+  //   CategoryModel(Icons.desktop_windows, "Electronics", () {}),
+  //   CategoryModel(Icons.fastfood, "Food", () {}),
+  //   CategoryModel(Icons.local_grocery_store_rounded, "Grocery", () {}),
+  //   CategoryModel(Icons.diamond_outlined, "Fashion", () {}),
+  // ];
 
   @override
   Widget build(BuildContext context) {
@@ -51,11 +51,9 @@ class _CategoryListScreenState extends State<CategoryListScreen> {
                 crossAxisSpacing: 16,
                 mainAxisSpacing: 16,
               ),
-              itemCount: categoryData.length,
+              itemCount: 10,
               itemBuilder: (context, index) {
-                return FittedBox(
-                  child: CategoryCard(icon: categoryData[index].iconData,categoryName: categoryData[index].categoryName,onTap: categoryData[index].onTap,),
-                );
+                return FittedBox();
               }),
         ),
       ),

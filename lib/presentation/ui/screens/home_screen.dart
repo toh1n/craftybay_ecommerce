@@ -1,11 +1,15 @@
-import 'package:craftybay_ecommerce/data/models/category_model.dart';
-import 'package:craftybay_ecommerce/presentation/ui/screens/category_list_screen.dart';
+import 'package:craftybay_ecommerce/presentation/state_holders/base_nav_controller.dart';
+import 'package:craftybay_ecommerce/presentation/state_holders/category_controller.dart';
+import 'package:craftybay_ecommerce/presentation/state_holders/home_slider_controller.dart';
+import 'package:craftybay_ecommerce/presentation/state_holders/new_product_controller.dart';
+import 'package:craftybay_ecommerce/presentation/state_holders/popular_product_controller.dart';
+import 'package:craftybay_ecommerce/presentation/state_holders/special_product_controller.dart';
 import 'package:craftybay_ecommerce/presentation/ui/utility/image_manager.dart';
 import 'package:craftybay_ecommerce/presentation/ui/widgets/category_card.dart';
 import 'package:craftybay_ecommerce/presentation/ui/widgets/circular_icon_button.dart';
 import 'package:craftybay_ecommerce/presentation/ui/widgets/home/home_slider.dart';
 import 'package:craftybay_ecommerce/presentation/ui/widgets/home/section_header.dart';
-import 'package:craftybay_ecommerce/presentation/ui/widgets/product_cart.dart';
+import 'package:craftybay_ecommerce/presentation/ui/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -18,16 +22,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
-
-  List <CategoryModel> categoryData = [
-    CategoryModel(Icons.desktop_windows, "Electronics", () {}),
-    CategoryModel(Icons.fastfood, "Food", () {}),
-    CategoryModel(Icons.local_grocery_store_rounded, "Grocery", () {}),
-    CategoryModel(Icons.diamond_outlined, "Fashion", () {}),
-  ];
-
-
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -51,15 +45,15 @@ class _HomeScreenState extends State<HomeScreen> {
         )) ??
             false;
       },
+
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
           elevation: 0,
-          leadingWidth: 0,
           title: Row(
             children: [
               SvgPicture.asset(
-                ImageManager.craftyBayNavLogoSVG,
+                ImageAssets.craftyBayNavLogoSVG,
               ),
               const Spacer(),
               CircularIconButton(
@@ -104,11 +98,25 @@ class _HomeScreenState extends State<HomeScreen> {
                 const SizedBox(
                   height: 16,
                 ),
-                const HomeSlider(),
+                GetBuilder<HomeSlidersController>(
+                    builder: (homeSliderController) {
+                      if (homeSliderController.getHomeSlidersInProgress) {
+                        return const SizedBox(
+                          height: 180.0,
+                          child: Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                        );
+                      }
+                      return HomeSlider(
+                        sliders: homeSliderController.sliderModel.data ?? [],
+                      );
+                    }
+                ),
                 SectionHeader(
                   title: 'Categories',
                   onTap: () {
-                    Get.to(const CategoryListScreen());
+                    Get.find<BaseNavController>().changeScreen(1);
                   },
                 ),
                 const SizedBox(
@@ -116,28 +124,59 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 SizedBox(
                   height: 90,
-                  child: ListView.builder(
-                      itemCount: categoryData.length,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        return  CategoryCard(icon: categoryData[index].iconData,categoryName: categoryData[index].categoryName,onTap: categoryData[index].onTap,);
-                      }),
+                  child: GetBuilder<CategoryController>(
+                      builder: (categoryController) {
+                        if (categoryController.getCategoriesInProgress) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                        return ListView.builder(
+                            itemCount: categoryController.categoryModel.data?.length ?? 0,
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) {
+                              return CategoryCard(
+                                categoryData: categoryController.categoryModel.data![index], onTap: () {
+                                // Get.to(ProductListScreen(
+                                //     categoryId: categoryController
+                                //         .categoryModel.data![index].id!));
+                              },
+                              );
+                            });
+                      }
+                  ),
                 ),
                 const SizedBox(
                   height: 16,
                 ),
                 SectionHeader(
                   title: 'Popular',
-                  onTap: () {},
+                  onTap: () {
+                    // Get.to(ProductListScreen(
+                    //   productModel:
+                    //   Get.find<PopularProductController>().popularProductModel,
+                    // ));
+                  },
                 ),
                 SizedBox(
                   height: 165,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 20,
-                    itemBuilder: (context, index) {
-                      return const ProductCard();
-                    },
+                  child: GetBuilder<PopularProductController>(
+                      builder: (productController) {
+                        if (productController.getPopularProductsInProgress) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                        return ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: productController.popularProductModel.data?.length ?? 0,
+                          itemBuilder: (context, index) {
+                            return ProductCard(
+                              product:  productController.popularProductModel.data![index],
+                            );
+                          },
+                        );
+                      }
                   ),
                 ),
                 const SizedBox(
@@ -145,16 +184,32 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 SectionHeader(
                   title: 'Special',
-                  onTap: () {},
+                  onTap: () {
+                    // Get.to(ProductListScreen(
+                    //   productModel:
+                    //   Get.find<SpecialProductController>().specialProductModel,
+                    // ));
+                  },
                 ),
                 SizedBox(
                   height: 165,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 20,
-                    itemBuilder: (context, index) {
-                      return const ProductCard();
-                    },
+                  child: GetBuilder<SpecialProductController>(
+                      builder: (productController) {
+                        if (productController.getSpecialProductsInProgress) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                        return ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: productController.specialProductModel.data?.length ?? 0,
+                          itemBuilder: (context, index) {
+                            return ProductCard(
+                              product:  productController.specialProductModel.data![index],
+                            );
+                          },
+                        );
+                      }
                   ),
                 ),
                 const SizedBox(
@@ -162,16 +217,32 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 SectionHeader(
                   title: 'New',
-                  onTap: () {},
+                  onTap: () {
+                    // Get.to(ProductListScreen(
+                    //   productModel:
+                    //   Get.find<NewProductController>().newProductModel,
+                    // ));
+                  },
                 ),
                 SizedBox(
                   height: 165,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 20,
-                    itemBuilder: (context, index) {
-                      return const ProductCard();
-                    },
+                  child: GetBuilder<NewProductController>(
+                      builder: (productController) {
+                        if (productController.getNewProductsInProgress) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                        return ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: productController.newProductModel.data?.length ?? 0,
+                          itemBuilder: (context, index) {
+                            return ProductCard(
+                              product:  productController.newProductModel.data![index],
+                            );
+                          },
+                        );
+                      }
                   ),
                 )
               ],

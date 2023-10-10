@@ -1,40 +1,39 @@
+import 'package:craftybay_ecommerce/data/models/category_data.dart';
 import 'package:craftybay_ecommerce/presentation/ui/utility/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class CategoryCard extends StatelessWidget {
-
   const CategoryCard({
-    super.key, required this.icon, required this.onTap, required this.categoryName,
+    super.key, required this.categoryData, required this.onTap,
   });
-  final IconData icon;
+
+  final CategoryData categoryData;
   final VoidCallback onTap;
-  final String categoryName;
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: onTap,
+      borderRadius: BorderRadius.circular(8),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: Column(
           children: [
             Container(
+              height: 60,
+              width: 60,
               margin: const EdgeInsets.symmetric(horizontal: 8),
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                   color: AppColors.primaryColor.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(8)),
-              child:  Icon(
-                icon,
-                size: 32,
-                color: AppColors.primaryColor,
-              ),
+              child: Image.network(categoryData.categoryImg ?? '', height: 50,),
             ),
             const SizedBox(
               height: 8,
             ),
-             Text(
-              categoryName,
+            Text(
+              categoryData.categoryName ?? '',
               style: const TextStyle(
                   fontSize: 15,
                   color: AppColors.primaryColor,

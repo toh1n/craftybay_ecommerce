@@ -1,5 +1,6 @@
-import 'package:craftybay_ecommerce/application/app_info.dart';
+import 'package:craftybay_ecommerce/presentation/state_holders/auth_controller.dart';
 import 'package:craftybay_ecommerce/presentation/ui/screens/auth/email_verification_screen.dart';
+import 'package:craftybay_ecommerce/presentation/ui/screens/base_nav_screen.dart';
 import 'package:craftybay_ecommerce/presentation/ui/utility/image_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -19,9 +20,13 @@ class _SplashScreenState extends State<SplashScreen> {
     goToNextScreen();
   }
 
-  void goToNextScreen() {
+  Future<void> goToNextScreen() async {
+    await AuthController.getAccessToken();
     Future.delayed(const Duration(seconds: 2)).then((value) {
-      Get.offAll(const EmailVerificationScreen());
+      Get.offAll(() => AuthController.isLoggedIn
+          ? const BaseNavScreen()
+          : const EmailVerificationScreen(),
+      );
     });
   }
 
@@ -34,7 +39,7 @@ class _SplashScreenState extends State<SplashScreen> {
           const Spacer(),
           Center(
               child: SvgPicture.asset(
-                ImageManager.craftyBayLogoSVG,
+                ImageAssets.craftyBayLogoSVG,
                 width: 100,
               )),
           const Spacer(),
@@ -42,11 +47,7 @@ class _SplashScreenState extends State<SplashScreen> {
           const SizedBox(
             height: 16,
           ),
-          const Text(AppInfo.devInfo),
-          const SizedBox(
-            height: 8,
-          ),
-          const Text(AppInfo.versionInfo),
+          const Text('Version 1.0.0'),
           const SizedBox(
             height: 16,
           ),

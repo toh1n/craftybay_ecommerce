@@ -1,18 +1,17 @@
+import 'package:craftybay_ecommerce/data/models/slider_data.dart';
 
-import 'package:craftybay_ecommerce/data/models/category_data.dart';
-
-class CategoryModel {
+class SliderModel {
   String? msg;
-  List<CategoryData>? data;
+  List<SliderData>? data;
 
-  CategoryModel({this.msg, this.data});
+  SliderModel({this.msg, this.data});
 
-  CategoryModel.fromJson(Map<String, dynamic> json) {
+  SliderModel.fromJson(Map<String, dynamic> json) {
     msg = json['msg'];
     if (json['data'] != null) {
-      data = <CategoryData>[];
+      data = <SliderData>[];
       json['data'].forEach((v) {
-        data!.add(CategoryData.fromJson(v));
+        data!.add(SliderData.fromJson(v));
       });
     }
   }
@@ -26,3 +25,4 @@ class CategoryModel {
     return data;
   }
 }
+

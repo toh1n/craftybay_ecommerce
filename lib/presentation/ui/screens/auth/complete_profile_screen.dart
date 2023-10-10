@@ -24,7 +24,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
               children: [
                 Center(
                   child: SvgPicture.asset(
-                    ImageManager.craftyBayLogoSVG,
+                    ImageAssets.craftyBayLogoSVG,
                     width: 100,
                   ),
                 ),
