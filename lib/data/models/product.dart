@@ -1,4 +1,4 @@
-import 'package:craftybay_ecommerce/data/models/brand_model.dart';
+import 'package:craftybay_ecommerce/data/models/brand.dart';
 import 'package:craftybay_ecommerce/data/models/category_data.dart';
 
 class Product {
@@ -10,7 +10,7 @@ class Product {
   String? discountPrice;
   String? image;
   int? stock;
-  double? star;
+  int? star;
   String? remark;
   int? categoryId;
   int? brandId;

@@ -1,10 +1,7 @@
-
-
 import 'package:craftybay_ecommerce/data/models/network_response.dart';
 import 'package:craftybay_ecommerce/data/models/slider_model.dart';
-import 'package:craftybay_ecommerce/data/utility/network_caller.dart';
-import 'package:craftybay_ecommerce/data/utility/url_manager.dart';
-import 'package:flutter/foundation.dart';
+import 'package:craftybay_ecommerce/data/services/network_caller.dart';
+import 'package:craftybay_ecommerce/data/utility/urls.dart';
 import 'package:get/get.dart';
 
 class HomeSlidersController extends GetxController {
@@ -25,9 +22,6 @@ class HomeSlidersController extends GetxController {
     _getHomeSlidersInProgress = false;
     if (response.isSuccess) {
       _sliderModel = SliderModel.fromJson(response.responseJson ?? {});
-      if (kDebugMode) {
-        print(_sliderModel.toString());
-      }
       update();
       return true;
     } else {

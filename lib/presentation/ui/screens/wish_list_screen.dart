@@ -1,5 +1,4 @@
-import 'package:craftybay_ecommerce/presentation/state_holders/base_nav_controller.dart';
-import 'package:craftybay_ecommerce/presentation/ui/widgets/product_card.dart';
+import 'package:craftybay_ecommerce/presentation/state_holders/main_bottom_nav_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -15,7 +14,7 @@ class _WishListScreenState extends State<WishListScreen> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        Get.find<BaseNavController>().backToHome();
+        Get.find<MainBottomNavController>().backToHome();
         return false;
       },
       child: Scaffold(
@@ -33,7 +32,6 @@ class _WishListScreenState extends State<WishListScreen> {
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: GridView.builder(
-            itemCount: 10,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
                 crossAxisSpacing: 16,

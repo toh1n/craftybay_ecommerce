@@ -1,7 +1,6 @@
 import 'package:craftybay_ecommerce/data/models/network_response.dart';
-import 'package:craftybay_ecommerce/data/utility/network_caller.dart';
-import 'package:craftybay_ecommerce/data/utility/url_manager.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:craftybay_ecommerce/data/services/network_caller.dart';
+import 'package:craftybay_ecommerce/data/utility/urls.dart';
 import 'package:get/get.dart';
 
 class EmailVerificationController extends GetxController {
@@ -20,11 +19,9 @@ class EmailVerificationController extends GetxController {
     update();
     if (response.isSuccess) {
       _message = response.responseJson?['data'] ?? '';
-      Fluttertoast.showToast(msg: _message);
       return true;
     } else {
       _message = 'Email verification failed! Try again';
-      Fluttertoast.showToast(msg: _message);
       return false;
     }
   }

@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-class BaseNavController extends GetxController {
+class MainBottomNavController extends GetxController {
   int currentSelectedIndex = 0;
 
   void changeScreen(int index) {

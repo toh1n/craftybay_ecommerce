@@ -1,26 +1,25 @@
-
-import 'package:craftybay_ecommerce/presentation/state_holders/base_nav_controller.dart';
 import 'package:craftybay_ecommerce/presentation/state_holders/category_controller.dart';
 import 'package:craftybay_ecommerce/presentation/state_holders/home_slider_controller.dart';
+import 'package:craftybay_ecommerce/presentation/state_holders/main_bottom_nav_controller.dart';
 import 'package:craftybay_ecommerce/presentation/state_holders/new_product_controller.dart';
 import 'package:craftybay_ecommerce/presentation/state_holders/popular_product_controller.dart';
 import 'package:craftybay_ecommerce/presentation/state_holders/special_product_controller.dart';
 import 'package:craftybay_ecommerce/presentation/ui/screens/cart_screen.dart';
-import 'package:craftybay_ecommerce/presentation/ui/screens/category_list_screen.dart';
 import 'package:craftybay_ecommerce/presentation/ui/screens/home_screen.dart';
+import 'package:craftybay_ecommerce/presentation/ui/screens/category_list_screen.dart';
 import 'package:craftybay_ecommerce/presentation/ui/screens/wish_list_screen.dart';
 import 'package:craftybay_ecommerce/presentation/ui/utility/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class BaseNavScreen extends StatefulWidget {
-  const BaseNavScreen({super.key});
+class MainBottomNavScreen extends StatefulWidget {
+  const MainBottomNavScreen({super.key});
 
   @override
-  State<BaseNavScreen> createState() => _BaseNavScreenState();
+  State<MainBottomNavScreen> createState() => _MainBottomNavScreenState();
 }
 
-class _BaseNavScreenState extends State<BaseNavScreen> {
+class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
   final List<Widget> _screens = [
     const HomeScreen(),
     const CategoryListScreen(),
@@ -43,7 +42,7 @@ class _BaseNavScreenState extends State<BaseNavScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<BaseNavController>(builder: (controller) {
+    return GetBuilder<MainBottomNavController>(builder: (controller) {
       return Scaffold(
         body: _screens[controller.currentSelectedIndex],
         bottomNavigationBar: BottomNavigationBar(

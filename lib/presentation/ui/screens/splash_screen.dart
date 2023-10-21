@@ -1,7 +1,7 @@
 import 'package:craftybay_ecommerce/presentation/state_holders/auth_controller.dart';
 import 'package:craftybay_ecommerce/presentation/ui/screens/auth/email_verification_screen.dart';
-import 'package:craftybay_ecommerce/presentation/ui/screens/base_nav_screen.dart';
-import 'package:craftybay_ecommerce/presentation/ui/utility/image_manager.dart';
+import 'package:craftybay_ecommerce/presentation/ui/screens/main_bottom_nav_screen.dart';
+import 'package:craftybay_ecommerce/presentation/ui/utility/image_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -24,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
     await AuthController.getAccessToken();
     Future.delayed(const Duration(seconds: 2)).then((value) {
       Get.offAll(() => AuthController.isLoggedIn
-          ? const BaseNavScreen()
+          ? const MainBottomNavScreen()
           : const EmailVerificationScreen(),
       );
     });
@@ -39,9 +39,9 @@ class _SplashScreenState extends State<SplashScreen> {
           const Spacer(),
           Center(
               child: SvgPicture.asset(
-                ImageAssets.craftyBayLogoSVG,
-                width: 100,
-              )),
+            ImageAssets.craftyBayLogoSVG,
+            width: 100,
+          )),
           const Spacer(),
           const CircularProgressIndicator(),
           const SizedBox(

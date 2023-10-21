@@ -14,7 +14,7 @@ class NetworkCaller {
       Response response = await get(Uri.parse(url),
           headers: {
             'token': AuthController.accessToken.toString()
-          });
+      });
       log(response.statusCode.toString());
       log(response.body);
       if (response.statusCode == 200) {
@@ -50,8 +50,7 @@ class NetworkCaller {
           response.statusCode,
           jsonDecode(response.body),
         );
-      }
-      else if (response.statusCode == 401) {
+      } else if (response.statusCode == 401) {
         if (isLogin == false) {
           gotoLogin();
         }

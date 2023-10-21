@@ -1,5 +1,4 @@
-
-import 'package:craftybay_ecommerce/data/models/category_data.dart';
+import 'category_data.dart';
 
 class CategoryModel {
   String? msg;

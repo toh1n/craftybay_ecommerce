@@ -1,10 +1,10 @@
-
 import 'package:craftybay_ecommerce/data/models/network_response.dart';
 import 'package:craftybay_ecommerce/data/models/product_model.dart';
-import 'package:craftybay_ecommerce/data/utility/network_caller.dart';
-import 'package:craftybay_ecommerce/data/utility/url_manager.dart';
+import 'package:craftybay_ecommerce/data/services/network_caller.dart';
+import 'package:craftybay_ecommerce/data/utility/urls.dart';
 import 'package:get/get.dart';
 
+// Number of lines : 35
 // SRP - Single Responsibility Principle
 
 class PopularProductController extends GetxController {
@@ -22,7 +22,7 @@ class PopularProductController extends GetxController {
     _getPopularProductsInProgress = true;
     update();
     final NetworkResponse response =
-    await NetworkCaller.getRequest(Urls.getProductsByRemarks('popular'));
+        await NetworkCaller.getRequest(Urls.getProductsByRemarks('popular'));
     _getPopularProductsInProgress = false;
     if (response.isSuccess) {
       _popularProductModel = ProductModel.fromJson(response.responseJson ?? {});

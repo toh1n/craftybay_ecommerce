@@ -30,11 +30,11 @@ class _HomeSliderState extends State<HomeSlider> {
             return Builder(
               builder: (BuildContext context) {
                 return Container(
-                  width: MediaQuery.of(context).size.width,
-                  margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                    width: MediaQuery.of(context).size.width,
+                    margin: const EdgeInsets.symmetric(horizontal: 5.0),
                   decoration: BoxDecoration(
                       color: AppColors.primaryColor.withOpacity(0.2),
-                      borderRadius: BorderRadius.circular(8)
+                    borderRadius: BorderRadius.circular(8)
                   ),
                   alignment: Alignment.center,
                   child: Stack(
@@ -45,9 +45,9 @@ class _HomeSliderState extends State<HomeSlider> {
                       Positioned(
                         bottom: 0,
                         child: Text(sliderData.title ?? '', style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.white
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white
                         ),),
                       )
                     ],

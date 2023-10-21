@@ -1,7 +1,7 @@
 import 'package:craftybay_ecommerce/data/models/network_response.dart';
 import 'package:craftybay_ecommerce/data/models/product_model.dart';
-import 'package:craftybay_ecommerce/data/utility/network_caller.dart';
-import 'package:craftybay_ecommerce/data/utility/url_manager.dart';
+import 'package:craftybay_ecommerce/data/services/network_caller.dart';
+import 'package:craftybay_ecommerce/data/utility/urls.dart';
 import 'package:get/get.dart';
 
 class SpecialProductController extends GetxController {
