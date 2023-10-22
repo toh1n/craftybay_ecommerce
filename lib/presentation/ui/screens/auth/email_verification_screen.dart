@@ -19,6 +19,12 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
+  void dispose() {
+    super.dispose();
+    _emailTEController.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(

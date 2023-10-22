@@ -5,6 +5,7 @@ import 'package:craftybay_ecommerce/presentation/ui/utility/app_colors.dart';
 import 'package:craftybay_ecommerce/presentation/ui/utility/image_assets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
@@ -27,6 +28,12 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
   void initState() {
     super.initState();
     otpVerificationController.startTimer();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _otpTEController.dispose();
   }
 
   @override
@@ -138,9 +145,12 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
                 GetBuilder<OtpVerificationController>(builder: (controller) {
                   return TextButton(
                     onPressed: controller.canResend
-                        ? () {}
+                        ? () {
+                      Fluttertoast.showToast(msg: "Code Resent");
+                      controller.resendOTP(widget.email);
+                    }
                         : () {
-                            controller.resendOTP(widget.email);
+
                           },
                     style: controller.canResend
                         ? TextButton.styleFrom(foregroundColor: Colors.green)

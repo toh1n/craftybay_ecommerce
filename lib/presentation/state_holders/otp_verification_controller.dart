@@ -1,7 +1,5 @@
 import 'dart:async';
-
 import 'package:craftybay_ecommerce/data/models/network_response.dart';
-import 'package:craftybay_ecommerce/data/models/user_model.dart';
 import 'package:craftybay_ecommerce/data/services/network_caller.dart';
 import 'package:craftybay_ecommerce/data/utility/urls.dart';
 import 'package:craftybay_ecommerce/presentation/state_holders/auth_controller.dart';
@@ -12,28 +10,30 @@ class OtpVerificationController extends GetxController {
   bool _otpVerificationInProgress = false;
   String _message = '';
 
-  late Timer timer;
-  int start = 20;
-  bool canResend = false;
+  late Timer _timer;
+  int _start = 120;
+  bool _canResend = false;
 
-  UserModel _userModel = UserModel();
+  bool get canResend => _canResend;
+  int get start  => _start;
+
 
   bool get otpVerificationInProgress => _otpVerificationInProgress;
 
   String get message => _message;
 
   void startTimer() {
-    canResend = false;
-    timer = Timer.periodic(
+    _canResend = false;
+    _timer = Timer.periodic(
       const Duration(seconds: 1),
           (Timer timer) {
-        if (start == 0) {
+        if (_start == 0) {
           timer.cancel();
-          canResend = true;
-          start = 120;
+          _canResend = true;
+          _start = 120;
           update();
         } else {
-          start--;
+          _start--;
           update();
         }
       },
@@ -52,7 +52,6 @@ class OtpVerificationController extends GetxController {
 
       final NetworkResponse readProfile = await NetworkCaller.getRequest(Urls.readProfile);
 
-      _userModel = UserModel.fromJson(readProfile.responseJson ?? {});
 
       if(readProfile.responseJson!['data'] == null || readProfile.responseJson!['data'] == ''){
         return -1;
@@ -67,6 +66,7 @@ class OtpVerificationController extends GetxController {
 
   Future<bool> resendOTP(String email) async {
     startTimer();
+    _canResend = false;
     update();
     final NetworkResponse response = await NetworkCaller.getRequest(Urls.verifyEmail(email));
     update();
