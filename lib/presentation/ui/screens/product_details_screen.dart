@@ -1,6 +1,7 @@
 import 'package:craftybay_ecommerce/data/models/product_details.dart';
 import 'package:craftybay_ecommerce/presentation/state_holders/add_to_cart_controller.dart';
 import 'package:craftybay_ecommerce/presentation/state_holders/product_details_controller.dart';
+import 'package:craftybay_ecommerce/presentation/state_holders/wish_list_controller.dart';
 import 'package:craftybay_ecommerce/presentation/ui/screens/review_screen.dart';
 import 'package:craftybay_ecommerce/presentation/ui/utility/app_colors.dart';
 import 'package:craftybay_ecommerce/presentation/ui/widgets/custom_stepper.dart';
@@ -130,7 +131,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               ),
               TextButton(
                 onPressed: () {
-                  Get.to(ReviewScreen(id: widget.productId.toString()));
+                  Get.to(ReviewScreen(id: widget.productId));
                 },
                 child: const Text(
                   'Review',
@@ -141,16 +142,27 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   ),
                 ),
               ),
-              const Card(
-                color: AppColors.primaryColor,
-                child: Padding(
-                  padding: EdgeInsets.all(2.0),
-                  child: Icon(
-                    Icons.favorite_border,
-                    size: 16,
-                    color: Colors.white,
-                  ),
-                ),
+              GetBuilder<WishListController>(
+                builder: (controller) {
+                  return InkWell(
+                    onTap: (){
+
+                      controller.addToWishList(widget.productId);
+
+                    },
+                    child: const Card(
+                      color: AppColors.primaryColor,
+                      child: Padding(
+                        padding: EdgeInsets.all(2.0),
+                        child: Icon(
+                          Icons.favorite_border,
+                          size: 16,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  );
+                }
               )
             ],
           ),

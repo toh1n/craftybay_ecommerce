@@ -1,4 +1,6 @@
 import 'package:craftybay_ecommerce/presentation/state_holders/main_bottom_nav_controller.dart';
+import 'package:craftybay_ecommerce/presentation/state_holders/wish_list_controller.dart';
+import 'package:craftybay_ecommerce/presentation/ui/widgets/wish_list_product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -31,17 +33,22 @@ class _WishListScreenState extends State<WishListScreen> {
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-                crossAxisSpacing: 16,
-                mainAxisSpacing: 16,
-              ),
-              itemBuilder: (context, index) {
-                return const FittedBox(
-                  // child: ProductCard(),
-                );
-              }),
+          child: GetBuilder<WishListController>(
+            builder: (controller) {
+              return GridView.builder(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    crossAxisSpacing: 16,
+                    mainAxisSpacing: 16,
+                  ),
+                  itemCount: controller.wishListModel.data!.length,
+                  itemBuilder: (context, index) {
+                    return FittedBox(
+                      child: WishListProductCard(product: controller.wishListModel.data![index].product!),
+                    );
+                  });
+            }
+          ),
         ),
       ),
     );

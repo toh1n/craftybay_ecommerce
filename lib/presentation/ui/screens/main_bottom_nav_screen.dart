@@ -4,6 +4,7 @@ import 'package:craftybay_ecommerce/presentation/state_holders/main_bottom_nav_c
 import 'package:craftybay_ecommerce/presentation/state_holders/new_product_controller.dart';
 import 'package:craftybay_ecommerce/presentation/state_holders/popular_product_controller.dart';
 import 'package:craftybay_ecommerce/presentation/state_holders/special_product_controller.dart';
+import 'package:craftybay_ecommerce/presentation/state_holders/wish_list_controller.dart';
 import 'package:craftybay_ecommerce/presentation/ui/screens/cart_screen.dart';
 import 'package:craftybay_ecommerce/presentation/ui/screens/home_screen.dart';
 import 'package:craftybay_ecommerce/presentation/ui/screens/category_list_screen.dart';
@@ -36,6 +37,7 @@ class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
       Get.find<PopularProductController>().getPopularProducts();
       Get.find<NewProductController>().getNewProducts();
       Get.find<SpecialProductController>().getSpecialProducts();
+      Get.find<WishListController>().getWishList();
     });
     super.initState();
   }

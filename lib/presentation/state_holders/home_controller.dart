@@ -3,7 +3,6 @@ import 'package:craftybay_ecommerce/presentation/state_holders/base_state_contro
 class HomeController extends BaseStateController {
   @override
   Future<bool> call(BaseParams params) {
-    // TODO: implement call
     throw UnimplementedError();
   }
 }

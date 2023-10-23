@@ -1,4 +1,4 @@
-import 'package:craftybay_ecommerce/data/models/user_data.dart';
+import 'package:craftybay_ecommerce/data/models/review_data.dart';
 
 class ReviewModel {
   String? msg;

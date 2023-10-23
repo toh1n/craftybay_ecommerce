@@ -152,7 +152,8 @@ class _HomeScreenState extends State<HomeScreen> {
               SectionHeader(
                 title: 'Popular',
                 onTap: () {
-                  Get.to(ProductListScreen(
+                  Get.to(
+                      ProductListScreen(
                     productModel:
                     Get.find<PopularProductController>().popularProductModel,
                   ));
