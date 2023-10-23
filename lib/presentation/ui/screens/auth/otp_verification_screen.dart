@@ -146,12 +146,10 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
                   return TextButton(
                     onPressed: controller.canResend
                         ? () {
-                      Fluttertoast.showToast(msg: "Code Resent");
-                      controller.resendOTP(widget.email);
-                    }
-                        : () {
-
-                          },
+                            Fluttertoast.showToast(msg: "Code Resent");
+                            controller.resendOTP(widget.email);
+                          }
+                        : () {},
                     style: controller.canResend
                         ? TextButton.styleFrom(foregroundColor: Colors.green)
                         : TextButton.styleFrom(foregroundColor: Colors.grey),

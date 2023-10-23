@@ -1,6 +1,7 @@
 import 'package:craftybay_ecommerce/data/models/product_details.dart';
 import 'package:craftybay_ecommerce/presentation/state_holders/add_to_cart_controller.dart';
 import 'package:craftybay_ecommerce/presentation/state_holders/product_details_controller.dart';
+import 'package:craftybay_ecommerce/presentation/ui/screens/review_screen.dart';
 import 'package:craftybay_ecommerce/presentation/ui/utility/app_colors.dart';
 import 'package:craftybay_ecommerce/presentation/ui/widgets/custom_stepper.dart';
 import 'package:craftybay_ecommerce/presentation/ui/widgets/home/product_image_slider.dart';
@@ -128,13 +129,16 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 ],
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Get.to(ReviewScreen(id: widget.productId.toString()));
+                },
                 child: const Text(
                   'Review',
                   style: TextStyle(
                       fontSize: 15,
                       color: AppColors.primaryColor,
-                      fontWeight: FontWeight.w500),
+                      fontWeight: FontWeight.w500,
+                  ),
                 ),
               ),
               const Card(

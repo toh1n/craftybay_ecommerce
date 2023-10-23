@@ -1,0 +1,28 @@
+import 'package:craftybay_ecommerce/data/models/user_data.dart';
+
+class ReviewModel {
+  String? msg;
+  List<Data>? data;
+
+  ReviewModel({this.msg, this.data});
+
+  ReviewModel.fromJson(Map<String, dynamic> json) {
+    msg = json['msg'];
+    if (json['data'] != null) {
+      data = <Data>[];
+      json['data'].forEach((v) {
+        data!.add(Data.fromJson(v));
+      });
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['msg'] = msg;
+    if (this.data != null) {
+      data['data'] = this.data!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
