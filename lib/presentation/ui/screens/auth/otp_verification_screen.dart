@@ -19,7 +19,7 @@ class OTPVerificationScreen extends StatefulWidget {
 }
 
 class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
-  final TextEditingController _otpTEController = TextEditingController();
+   final TextEditingController _otpTEController = TextEditingController();
 
   OtpVerificationController otpVerificationController =
       Get.find<OtpVerificationController>();
@@ -30,11 +30,6 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
     otpVerificationController.startTimer();
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-    _otpTEController.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -95,8 +90,6 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
                   ),
                   animationDuration: const Duration(milliseconds: 300),
                   enableActiveFill: true,
-                  onCompleted: (v) {},
-                  onChanged: (value) {},
                   beforeTextPaste: (text) {
                     return true;
                   },

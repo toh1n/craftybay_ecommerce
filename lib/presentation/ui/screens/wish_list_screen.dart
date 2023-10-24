@@ -47,19 +47,18 @@ class _WishListScreenState extends State<WishListScreen> {
               {
                 return const Center(child: CircularProgressIndicator(),);
               }
-            if(controller.wishListModel.data!.isNotEmpty)
-              {
-                return ListView.builder(
-
-                    itemCount: controller.wishListModel.data!.length,
-
-                    itemBuilder: (context, index) {
-                      return WishListProductCard(wishListProduct: controller.wishListModel.data![index].product!);
-                    });
-              }
-            else {
-              return const Center(child: Text("Empty List"),);
+            if (controller.wishListModel.data?.isEmpty ?? true) {
+              return const Center(
+                child: Text('Empty list'),
+              );
             }
+            return ListView.builder(
+
+                itemCount: controller.wishListModel.data!.length,
+
+                itemBuilder: (context, index) {
+                  return WishListProductCard(wishListProduct: controller.wishListModel.data![index].product!);
+                });
 
           }
         ),
