@@ -28,6 +28,8 @@ class Urls {
 
   static String addToWishList(int id) => '$_baseUrl/CreateWishList/$id';
 
+  static String removeFromWishList(int id) => '$_baseUrl/RemoveWishList/$id';
+
   static String completeProfile = '$_baseUrl/CreateProfile';
 
   static String readProfile = '$_baseUrl/ReadProfile';

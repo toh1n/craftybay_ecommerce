@@ -12,6 +12,15 @@ class WishListScreen extends StatefulWidget {
 }
 
 class _WishListScreenState extends State<WishListScreen> {
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Get.find<WishListController>().getWishList();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -29,26 +38,30 @@ class _WishListScreenState extends State<WishListScreen> {
           elevation: 0,
           leading: const BackButton(
             color: Colors.black,
+
           ),
         ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: GetBuilder<WishListController>(
-            builder: (controller) {
-              return GridView.builder(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
-                    crossAxisSpacing: 16,
-                    mainAxisSpacing: 16,
-                  ),
-                  itemCount: controller.wishListModel.data!.length,
-                  itemBuilder: (context, index) {
-                    return FittedBox(
-                      child: WishListProductCard(product: controller.wishListModel.data![index].product!),
-                    );
-                  });
+        body: GetBuilder<WishListController>(
+          builder: (controller) {
+            if(controller.getNewProductsInProgress)
+              {
+                return const Center(child: CircularProgressIndicator(),);
+              }
+            if(controller.wishListModel.data!.isNotEmpty)
+              {
+                return ListView.builder(
+
+                    itemCount: controller.wishListModel.data!.length,
+
+                    itemBuilder: (context, index) {
+                      return WishListProductCard(wishListProduct: controller.wishListModel.data![index].product!);
+                    });
+              }
+            else {
+              return const Center(child: Text("Empty List"),);
             }
-          ),
+
+          }
         ),
       ),
     );

@@ -255,16 +255,16 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Column(
+                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Price', style: TextStyle(
+                    const Text('Price', style: TextStyle(
                       fontWeight: FontWeight.w600,
                       fontSize: 16,
                       color: Colors.black54
                     ),),
-                    SizedBox(height: 4,),
-                    Text('\$1000', style: TextStyle(
+                    const SizedBox(height: 4,),
+                    Text('\$${details.product?.price}', style: const TextStyle(
                         fontWeight: FontWeight.w600,
                         fontSize: 18,
                         color: AppColors.primaryColor

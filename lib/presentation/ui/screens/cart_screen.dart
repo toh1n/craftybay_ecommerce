@@ -53,63 +53,70 @@ class _CartScreenState extends State<CartScreen> {
                 child: CircularProgressIndicator(),
               );
             }
-            return Column(
-              children: [
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: cartListController.cartListModel.data?.length ?? 0,
-                    itemBuilder: (context, index) {
-                      return CartProductCard(
-                        cartData: cartListController.cartListModel.data![index],
-                      );
-                    },
-                  ),
-                ),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                  decoration: BoxDecoration(
-                      color: AppColors.primaryColor.withOpacity(0.1),
-                      borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(16),
-                        topRight: Radius.circular(16),
-                      )),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+            if(cartListController.cartListModel.data != null && cartListController.cartListModel.data!.isNotEmpty)
+              {
+                return Column(
+                  children: [
+                    Expanded(
+                      child: ListView.builder(
+                        itemCount: cartListController.cartListModel.data?.length ?? 0,
+                        itemBuilder: (context, index) {
+                          return CartProductCard(
+                            cartData: cartListController.cartListModel.data![index],
+                          );
+                        },
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                      decoration: BoxDecoration(
+                          color: AppColors.primaryColor.withOpacity(0.1),
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(16),
+                            topRight: Radius.circular(16),
+                          )),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text(
-                            'Total Price',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 16,
-                                color: Colors.black54),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                'Total Price',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 16,
+                                    color: Colors.black54),
+                              ),
+                              const SizedBox(
+                                height: 4,
+                              ),
+                              Text(
+                                '\$ ${cartListController.totalPrice}',
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 18,
+                                    color: AppColors.primaryColor),
+                              ),
+                            ],
                           ),
-                          const SizedBox(
-                            height: 4,
-                          ),
-                          Text(
-                            '\$ ${cartListController.totalPrice}',
-                            style: const TextStyle(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 18,
-                                color: AppColors.primaryColor),
-                          ),
+                          SizedBox(
+                            width: 120,
+                            child: ElevatedButton(
+                              onPressed: () {},
+                              child: const Text('Checkout'),
+                            ),
+                          )
                         ],
                       ),
-                      SizedBox(
-                        width: 120,
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          child: const Text('Checkout'),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-              ],
-            );
+                    ),
+                  ],
+                );
+              }
+            else{
+              return const Center(child: Text("Empty Cart"),);
+            }
+
           }
         ),
       ),

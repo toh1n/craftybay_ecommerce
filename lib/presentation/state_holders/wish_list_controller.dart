@@ -7,17 +7,6 @@ import 'package:get/get.dart';
 
 class WishListController extends GetxController{
 
-
-  Future<void> addToWishList(int id) async {
-
-    final NetworkResponse response = await NetworkCaller.getRequest(Urls.addToWishList(id));
-
-    if(response.responseJson!['msg'] == "success") {
-      Fluttertoast.showToast(msg: "Added to wish List");
-    } else {
-      Fluttertoast.showToast(msg: "Failed to add to wish List");
-    }
-  }
   bool _getNewProductsInProgress = false;
   WishListModel _wishListModel = WishListModel();
   String _errorMessage = '';
@@ -42,6 +31,32 @@ class WishListController extends GetxController{
       _errorMessage = 'New product fetch failed! Try again.';
       update();
       return false;
+    }
+  }
+
+  Future<void> addToWishList(int id) async {
+
+    final NetworkResponse response = await NetworkCaller.getRequest(Urls.addToWishList(id));
+
+    if(response.responseJson!['msg'] == "success") {
+      Fluttertoast.showToast(msg: "Added to wish List");
+    } else {
+      Fluttertoast.showToast(msg: "Failed to add to wish List");
+    }
+  }
+
+  Future<void> removeFromWishList(int id) async {
+    _getNewProductsInProgress = true;
+    update();
+    final NetworkResponse response = await NetworkCaller.getRequest(Urls.removeFromWishList(id));
+    _getNewProductsInProgress = false;
+    update();
+    if(response.responseJson!['msg'] == "success") {
+      _wishListModel.data?.removeWhere((element) => element.productId == id);
+      update();
+      Fluttertoast.showToast(msg: "Removed from wish List");
+    } else {
+      Fluttertoast.showToast(msg: "Failed to remove from wish List");
     }
   }
 }
