@@ -3,6 +3,7 @@ import 'package:craftybay_ecommerce/presentation/ui/utility/app_colors.dart';
 import 'package:craftybay_ecommerce/presentation/ui/widgets/review_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rating_dialog/rating_dialog.dart';
 
 class ReviewScreen extends StatefulWidget {
   final int id;
@@ -72,29 +73,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
                     ),),
                     FloatingActionButton(
                       onPressed: (){
-                        showModalBottomSheet(
-                            context: context,
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.vertical(
-                              top: Radius.circular(25.0),
-                            ),),
-                            builder: (context){
-                          return Container(
-                            height: MediaQuery.of(context).size.height * .7,
-                            width: double.infinity,
-                            decoration: const BoxDecoration(
-                              color: Colors.white,
-                            ),
-                            child: SingleChildScrollView(
-                              child: Column(
-                                children: [
-                                  Text("What is you Rate"),
-
-                                ],
-                              ),
-                            ),
-                          );
-                        }
-                        );
+                        _showRatingAppDialog(controller,widget.id);
                       },
                       child: const Icon(Icons.add),
                     )
@@ -107,6 +86,50 @@ class _ReviewScreenState extends State<ReviewScreen> {
       }),
 
 
+    );
+  }
+
+  void _showRatingAppDialog(ReviewController controller,int id) {
+    final dialog = RatingDialog(
+      initialRating: 1.0,
+      title: const Text(
+        'Give your ratings',
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          fontSize: 25,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      message: const Text(
+        'Tap a star to set your rating.',
+        textAlign: TextAlign.center,
+        style: TextStyle(fontSize: 15),
+      ),
+      // your app's logo?
+      submitButtonText: 'Submit',
+      commentHint: 'What do you think about this product?',
+      onSubmitted: (response) {
+        Map<String,dynamic> body = {
+          "description": response.comment.toString(),
+          "product_id": widget.id,
+          "rating": response.rating
+        };
+
+        controller.setReview(id,body).then((value) {
+          if(value){
+            Get.find<ReviewController>().getReview(widget.id);
+          }
+        });
+
+
+      },
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      barrierDismissible: true, // set to false if you want to force a rating
+      builder: (context) => dialog,
     );
   }
 

@@ -31,5 +31,22 @@ class ReviewController extends GetxController{
     }
   }
 
+  Future<bool> setReview(int productId, Map<String,dynamic> body ) async {
+
+    _getReviewInProgress = true;
+    update();
+    final NetworkResponse response = await NetworkCaller.postRequest(Urls.setReview,body);
+    _getReviewInProgress = false;
+    if (response.responseJson!['msg'] == 'success') {
+      update();
+      return true;
+    } else {
+      Fluttertoast.showToast(msg: 'Failed to add review! Try again.');
+      update();
+      return false;
+    }
+  }
+
+
 
 }
