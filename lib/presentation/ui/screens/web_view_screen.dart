@@ -1,4 +1,5 @@
 import 'package:craftybay_ecommerce/presentation/state_holders/cart_list_controller.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -28,14 +29,18 @@ class _WebViewScreenState extends State<WebViewScreen> {
           },
           onPageStarted: (String url) {},
           onPageFinished: (String url) {
-            print('entered');
+            if (kDebugMode) {
+              print('entered');
+            }
             if (url.endsWith("tran_type=success")) {
               navigateBack();
             }
           },
           onWebResourceError: (WebResourceError error) {},
           onNavigationRequest: (NavigationRequest request) {
-            print(request);
+            if (kDebugMode) {
+              print(request);
+            }
             if (request.url.contains("tran_type=success")) {
               navigateBack();
             }
