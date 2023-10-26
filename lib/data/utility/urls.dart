@@ -37,4 +37,6 @@ class Urls {
   static String getWishList = '$_baseUrl/ProductWishList';
 
   static String createInvoice = '$_baseUrl/InvoiceCreate';
+
+  static String setReview = '$_baseUrl/CreateProductReview';
 }
