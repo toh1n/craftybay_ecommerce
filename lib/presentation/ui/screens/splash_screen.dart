@@ -1,4 +1,8 @@
+import 'package:craftybay_ecommerce/data/models/network_response.dart';
+import 'package:craftybay_ecommerce/data/services/network_caller.dart';
+import 'package:craftybay_ecommerce/data/utility/urls.dart';
 import 'package:craftybay_ecommerce/presentation/state_holders/auth_controller.dart';
+import 'package:craftybay_ecommerce/presentation/ui/screens/auth/complete_profile_screen.dart';
 import 'package:craftybay_ecommerce/presentation/ui/screens/auth/email_verification_screen.dart';
 import 'package:craftybay_ecommerce/presentation/ui/screens/main_bottom_nav_screen.dart';
 import 'package:craftybay_ecommerce/presentation/ui/utility/image_assets.dart';
@@ -22,11 +26,22 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> goToNextScreen() async {
     await AuthController.getAccessToken();
-    Future.delayed(const Duration(seconds: 2)).then((value) {
-      Get.offAll(() => AuthController.isLoggedIn
-          ? const MainBottomNavScreen()
-          : const EmailVerificationScreen(),
-      );
+
+    Future.delayed(const Duration(seconds: 2)).then((value) async {
+
+      if(AuthController.isLoggedIn ) {
+        final NetworkResponse readProfile = await NetworkCaller.getRequest(Urls.readProfile);
+
+        if(readProfile.responseJson!['data'] == null || readProfile.responseJson!['data'] == ''){
+          Get.offAll(() => const CompleteProfileScreen());
+        }
+        else{
+          Get.offAll(() => const MainBottomNavScreen());
+        }
+      } else{
+        Get.offAll(() => const EmailVerificationScreen());
+      }
+
     });
   }
 

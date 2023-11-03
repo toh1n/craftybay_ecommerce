@@ -88,6 +88,7 @@ class _CraftyBayState extends State<CraftyBay> {
                 OutlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
           )),
       darkTheme: ThemeData(
+
           brightness: Brightness.dark,
           primarySwatch:
               MaterialColor(AppColors.primaryColor.value, AppColors().color),
@@ -123,3 +124,5 @@ class _CraftyBayState extends State<CraftyBay> {
     super.dispose();
   }
 }
+
+

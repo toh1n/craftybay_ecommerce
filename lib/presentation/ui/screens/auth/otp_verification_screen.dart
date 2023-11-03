@@ -163,7 +163,7 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
 
     switch (response) {
       case -1:
-        Get.to(() => const CompleteProfileScreen());
+        Get.offAll(() => const CompleteProfileScreen());
         break;
 
       case 0:
@@ -176,7 +176,7 @@ class _OTPVerificationScreenState extends State<OTPVerificationScreen> {
         }
         break;
       case 1:
-        Get.to(() => const MainBottomNavScreen());
+        Get.offAll(() => const MainBottomNavScreen());
         break;
     }
 
