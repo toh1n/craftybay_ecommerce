@@ -4,9 +4,11 @@ import 'package:craftybay_ecommerce/presentation/state_holders/home_slider_contr
 import 'package:craftybay_ecommerce/presentation/state_holders/main_bottom_nav_controller.dart';
 import 'package:craftybay_ecommerce/presentation/state_holders/new_product_controller.dart';
 import 'package:craftybay_ecommerce/presentation/state_holders/popular_product_controller.dart';
+import 'package:craftybay_ecommerce/presentation/state_holders/read_profile_controller.dart';
 import 'package:craftybay_ecommerce/presentation/state_holders/special_product_controller.dart';
 import 'package:craftybay_ecommerce/presentation/ui/screens/auth/email_verification_screen.dart';
 import 'package:craftybay_ecommerce/presentation/ui/screens/product_list_screen.dart';
+import 'package:craftybay_ecommerce/presentation/ui/screens/update_profile_screen.dart';
 import 'package:craftybay_ecommerce/presentation/ui/utility/image_assets.dart';
 import 'package:craftybay_ecommerce/presentation/ui/widgets/category_card.dart';
 import 'package:craftybay_ecommerce/presentation/ui/widgets/circular_icon_button.dart';
@@ -17,6 +19,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -54,20 +57,32 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             CircularIconButton(
               icon: Icons.person,
-              onTap: () {},
+              onTap: () async {
+                await Get.find<ReadProfileController>().readProfileData();
+                Get.to(() => const UpdateProfileScreen());
+              },
             ),
             const SizedBox(
               width: 8,
             ),
             CircularIconButton(
               icon: Icons.call,
-              onTap: () {},
+              onTap: () {
+                launchUrlString("tel://${01629449529}");
+              },
             ),
             const SizedBox(
               width: 8,
             ),
             CircularIconButton(
               icon: Icons.notifications_none,
+              onTap: () {},
+            ),
+            const SizedBox(
+              width: 8,
+            ),
+            CircularIconButton(
+              icon: Icons.logout,
               onTap: () {
                 AuthController.clear();
                 Fluttertoast.showToast(msg: "Logged Out");
