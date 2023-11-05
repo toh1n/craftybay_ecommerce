@@ -21,7 +21,8 @@ class _HomeSliderState extends State<HomeSlider> {
         CarouselSlider(
           options: CarouselOptions(
               height: 180.0,
-              autoPlay: false,
+              autoPlay: true,
+              viewportFraction: 1,
               autoPlayInterval: const Duration(seconds: 3),
               onPageChanged: (int page, _) {
                 _selectedSlider.value = page;
@@ -47,7 +48,7 @@ class _HomeSliderState extends State<HomeSlider> {
                         child: Text(sliderData.title ?? '', style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w600,
-                          color: Colors.white
+                          color: Colors.black54
                         ),),
                       )
                     ],
