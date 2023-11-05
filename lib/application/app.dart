@@ -61,6 +61,7 @@ class _CraftyBayState extends State<CraftyBay> {
     //   builder: (context, themeMode, _) {
     return GetMaterialApp(
       navigatorKey: CraftyBay.globalKey,
+      debugShowCheckedModeBanner: false,
       home: const SplashScreen(),
       initialBinding: StateHolderBinder(),
       theme: ThemeData(
