@@ -248,9 +248,6 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                   const SizedBox(
                     height: 12,
                   ),
-                  const SizedBox(
-                    height: 40,
-                  ),
                   Text(
                     'Shipping Details',
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
@@ -258,7 +255,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                     ),
                   ),
                   const SizedBox(
-                    height: 24,
+                    height: 12,
                   ),
                   TextFormField(
                     keyboardType: TextInputType.name,
